@@ -2,7 +2,12 @@ import React from "react";
 
 class Root extends React.Component {
 	render() {
-		return this.props.children;
+		console.log(this.props.className);
+		return (
+			<div className={this.props.className}>
+				{this.props.children}
+			</div>
+		);
 	}
 }
 
