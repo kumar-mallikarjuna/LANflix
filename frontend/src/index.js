@@ -1,5 +1,6 @@
 import React from "react";
 import Root from "./components/Root";
+import Filemanager from "./components/Filemanager.js";
 import { render } from "react-dom";
 import styles from "./index.css";
 
@@ -13,8 +14,7 @@ render(
 				className={styles.Logo}
 			/>
 		</header>
-
-		<video control></video>
+		<Filemanager className={styles.Filemanager} />
 	</Root>,
 	root
 );
