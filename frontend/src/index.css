@@ -19,7 +19,18 @@ body {
 .Col {
 	color: #cccccc;
 	text-align: center;
-	background: #ffffff;
+	font-size: 2vh;
+	width: 5vw;
+	word-wrap: break-word;
+	margin-bottom: 1vw;
+}
+
+.Col:hover {
+	cursor: pointer;
+}
+
+.Filemanager {
+	text-align: center;
 }
 
 .Filemanager svg {
