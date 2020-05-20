@@ -7,7 +7,6 @@ import styles from "../index.css";
 class CustomCol extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props);
 	}
 
 	render() {
@@ -17,7 +16,9 @@ class CustomCol extends React.Component {
 					className={styles.Col}
 					onClick={() =>
 						this.props.action(
-							this.props.loc
+							this.props.loc,
+							this.props.isFolder,
+							this.props.mime
 						)
 					}
 				>
@@ -31,7 +32,11 @@ class CustomCol extends React.Component {
 			<Col
 				className={styles.Col}
 				onClick={() =>
-					this.props.changeDir(this.props.loc)
+					this.props.action(
+						this.props.loc,
+						this.props.isFolder,
+						this.props.mime
+					)
 				}
 			>
 				<FontAwesomeIcon icon={faFile} />

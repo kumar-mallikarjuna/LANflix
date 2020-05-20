@@ -37,3 +37,7 @@ body {
 	color: #196179;
 	font-size: 5vw;
 }
+
+.Filemanager video {
+	width: 90vw;
+}

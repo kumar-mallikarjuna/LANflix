@@ -1,9 +1,6 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import CustomCol from "./CustomCol.js";
 import styles from "../index.css";
 
@@ -16,64 +13,118 @@ class Filemanager extends React.Component {
 		this.update = this.update.bind(this);
 	}
 
-	update(path = "") {
-		fetch(window.location.origin + "/api/dircontents?path=" + path)
-			.then(data => data.json())
-			.then(data => {
-				console.log(data);
+	update(path = "", isFolder = "true", mime) {
+		if (isFolder === "true") {
+			fetch(
+				window.location.origin +
+					"/api/dircontents?path=" +
+					path
+			)
+				.then(data => data.json())
+				.then(data => {
+					this.grid = [];
 
-				this.grid = [];
+					data["folders"].forEach(v => {
+						let x = v;
+						if (x.length > 29) {
+							x =
+								x.substring(
+									0,
+									32
+								) + "..";
+						}
+						this.grid.push(
+							<CustomCol
+								action={
+									this
+										.action
+								}
+								key={v}
+								className={
+									styles.Col
+								}
+								loc={
+									path +
+									"/" +
+									v
+								}
+								isFolder="true"
+								mime=""
+							>
+								{x}
+							</CustomCol>
+						);
+					});
 
-				data["folders"].forEach(v => {
-					let x = v;
-					if (x.length > 29) {
-						x = x.substring(0, 32) + "..";
+					for (
+						let i = 0;
+						i < data["files"].length;
+						i++
+					) {
+						let v = data["files"][i];
+						let x = v;
+						if (x.length > 29) {
+							x =
+								x.substring(
+									0,
+									32
+								) + "..";
+						}
+						this.grid.push(
+							<CustomCol
+								action={
+									this
+										.action
+								}
+								key={v}
+								className={
+									styles.Col
+								}
+								loc={
+									path +
+									"/" +
+									v
+								}
+								isFolder="false"
+								mime={
+									data[
+										"mimes"
+									][i]
+								}
+							>
+								{x}
+							</CustomCol>
+						);
 					}
-					this.grid.push(
-						<CustomCol
-							action={this.action}
-							key={v}
-							className={styles.Col}
-							loc={v}
-							isFolder="true"
-						>
-							{x}
-						</CustomCol>
-					);
-				});
 
-				data["files"].forEach(v => {
-					let x = v;
-					if (x.length > 29) {
-						x = x.substring(0, 32) + "..";
-					}
-					this.grid.push(
-						<CustomCol
-							changeDir={
-								this.changeDir
-							}
-							key={v}
-							className={styles.Col}
-							loc={v}
-						>
-							{x}
-						</CustomCol>
+					this.grid = (
+						<Row xs={2} lg={6}>
+							{this.grid}
+						</Row>
 					);
-				});
 
+					this.forceUpdate();
+				});
+		} else {
+			if (mime.startsWith("video")) {
 				this.grid = (
-					<Row xs={2} lg={6}>
-						{this.grid}
-					</Row>
+					<video controls>
+						<source
+							src={
+								"static/files/" +
+								path
+							}
+						></source>
+					</video>
 				);
 
 				this.forceUpdate();
-			});
+			}
+		}
 	}
 
-	action(dir) {
-		this.currDir = this.currDir + "/" + dir;
-		this.update(this.currDir);
+	action(f, isFolder, mime) {
+		this.update(f, isFolder, mime);
 	}
 
 	componentDidMount() {
