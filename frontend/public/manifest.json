@@ -1,0 +1,15 @@
+{
+	"short_name": "LANflix",
+	"name": "LANflix",
+	"icons": [
+		{
+			"src": "images/logo.png",
+			"type": "image/png",
+			"sizes": "256x256"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#196179",
+	"background_color": "#000000"
+}

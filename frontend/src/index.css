@@ -1,10 +1,16 @@
 body {
-	background: url("static/images/wallpaper.jpg");
+	background: #000000;
 	color: #ffffff;
 }
 
 .Root {
+	height: 100vh;
+	width: 100;
 	padding: 1vw;
+}
+
+.Root:focus {
+	outline: none;
 }
 
 .Logo {
@@ -13,19 +19,22 @@ body {
 
 .Header {
 	text-align: center;
-	margin-bottom: 1vw;
+	margin-bottom: 2vw;
 }
 
 .Col {
 	color: #cccccc;
 	text-align: center;
-	font-size: 2vh;
-	width: 5vw;
+	font-size: 1vw;
+	width: 1vw;
+	height: 10vw;
 	word-wrap: break-word;
 	margin-bottom: 1vw;
+	border: transparent solid 0.25vw;
 }
 
-.Col:hover {
+.Colh {
+	border: #ffffff solid 0.25vw;
 	cursor: pointer;
 }
 
@@ -39,5 +48,7 @@ body {
 }
 
 .Filemanager video {
+	outline: none;
 	width: 90vw;
+	cursor: none;
 }

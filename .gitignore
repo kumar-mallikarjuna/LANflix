@@ -2,3 +2,4 @@ frontend/node_modules/*
 *.pyc
 *.pyo
 db.sqlite3
+frontend/files/*
