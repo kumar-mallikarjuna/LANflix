@@ -52,3 +52,9 @@ body {
 	width: 90vw;
 	cursor: none;
 }
+
+:focus {
+	outline: 0;
+	outline-color: transparent;
+	outline-style: none;
+}
